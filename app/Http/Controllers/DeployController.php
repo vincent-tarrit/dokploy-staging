@@ -22,9 +22,8 @@ class DeployController extends Controller
         $validated = $request->validate([
             'project_id' => 'required|int|exists:projects,id',
             'pr_number' => 'required|int',
-            'branch' => 'required|string|max:255'
         ]);
 
-        app(DeployService::class)->deploy(\App\Models\Project::find($validated['project_id']), 'delete', $validated['pr_number'], $validated['branch']);
+        app(DeployService::class)->deploy(\App\Models\Project::find($validated['project_id']), 'delete', $validated['pr_number'], '');
     }
 }

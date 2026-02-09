@@ -14,7 +14,6 @@ class DeployService {
         $staging = Staging::where([
             'project_id' => $project->id,
             'pr_number' => $prNumber,
-            'branch' => $branch,
         ])->first();
 
         if ($action === 'create') {
