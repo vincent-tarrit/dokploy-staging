@@ -10,6 +10,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Tiptap\Nodes\Text;
 
 class StagingsTable
 {
@@ -17,7 +18,9 @@ class StagingsTable
     {
         return $table
             ->columns([
-                TextColumn::make('id')
+                TextColumn::make('id'),
+                TextColumn::make('pr_number'),
+                TextColumn::make('branch')
             ])
             ->filters([
                 //
