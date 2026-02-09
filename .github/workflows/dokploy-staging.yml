@@ -26,7 +26,7 @@ jobs:
         run: |
           echo "Deploying staging for PR #${PR_NUMBER}"
 
-          curl -f -X POST "${{ inputs.dokploy_api_url }}/deploy" \
+          curl -f -X POST "${{ inputs.dokploy_api_url }}/api/deploy" \
             -H "Authorization: Bearer ${{ secrets.dokploy_token }}" \
             -H "Content-Type: application/json" \
             -d "{
@@ -42,7 +42,7 @@ jobs:
         run: |
           echo "Removing staging for PR #${PR_NUMBER}"
 
-          curl -f -X DELETE "${{ inputs.dokploy_api_url }}/remove" \
+          curl -f -X DELETE "${{ inputs.dokploy_api_url }}/api/remove" \
             -H "Authorization: Bearer ${{ secrets.dokploy_token }}" \
             -H "Content-Type: application/json" \
             -d "{
