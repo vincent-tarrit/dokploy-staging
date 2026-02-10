@@ -127,7 +127,7 @@ class DeployService {
     {
         $env = $project->environment_staging;
 
-        $env = str($env)->replace('{PR_NUMBER}', $prNumber);
+        $env = str($env)->replace('${PR_NUMBER}', $prNumber);
 
         $this->post($project, 'compose.update', [
             '0' => [
