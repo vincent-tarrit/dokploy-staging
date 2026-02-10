@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Projects\Schemas;
 
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -32,6 +33,8 @@ class ProjectForm
                     ->required(),
                 TextInput::make('domain_name')
                     ->required(),
+
+                TagsInput::make('extra_sub_domains'),
 
                 Textarea::make('environment_staging')
             ]);

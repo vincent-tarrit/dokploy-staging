@@ -150,20 +150,30 @@ class DeployService {
 
     protected function createDomain(Project $project, string $composeId, string $stagingName): void
     {
-        $this->post($project, 'domain.create', [
-            '0' => [
-                'json' => [
-                    'domainId' => '',
-                    'composeId' => $composeId,
-                    'host' => "{$stagingName}.".$project->domain_name,
-                    'port' => 80,
-                    'https' => true,
-                    'certificateType' => 'letsencrypt',
-                    'serviceName' => 'server',
-                    'domainType' => 'compose',
-                ],
-            ],
-        ]);
+        $baseConfig = [
+            'domainId'        => '',
+            'composeId'       => $composeId,
+            'port'            => 80,
+            'https'           => true,
+            'certificateType' => 'letsencrypt',
+            'serviceName'     => 'server',
+            'domainType'      => 'compose',
+        ];
+
+        $hosts = array_merge(
+            ["{$stagingName}.{$project->domain_name}"],
+            array_map(
+                fn ($extra) => "{$extra}.{$stagingName}.{$project->domain_name}",
+                $project->extra_sub_domains
+            )
+        );
+
+        $domains = array_map(
+            fn ($host) => ['json' => $baseConfig + ['host' => $host]],
+            $hosts
+        );
+
+        $this->post($project, 'domain.create', $domains);
     }
 
     protected function deleteEnvironment(Project $project, string $envId): void

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('github_repository');
             $table->string('compose_name_file');
             $table->string('domain_name');
+            $table->text('extra_sub_domains');
 
             $table->text('environment_staging');
 

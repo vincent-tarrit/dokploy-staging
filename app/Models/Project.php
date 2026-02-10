@@ -19,7 +19,8 @@ use SoftDeletes;
     protected function casts(): array
     {
         return [
-            'environment_staging' => 'encrypted'
+            'environment_staging' => 'encrypted',
+            'extra_sub_domains' => 'array'
         ];
     }
 
